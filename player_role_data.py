@@ -8,7 +8,8 @@ data_list = []
 
 # 获取数据
 def get_info():
-    page = 68473
+    # 开始标志
+    page = 68558
     while True:
         # 获取比赛选手详细信息的url
         url = 'https://m.wanplus.com/match/{}.html#data'.format(page)
@@ -18,7 +19,8 @@ def get_info():
         # 67695
         # 68472
         # 测试30388-30665
-        if page > 68557:
+        # 结束标志
+        if page > 68589:
             break
         page += 1
         if pqHtml('title').text()[:2] != '20':
