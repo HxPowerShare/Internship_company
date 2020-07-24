@@ -17,7 +17,7 @@ def get_game_date():
         for each in results:
             url = each[1]
             result = each[0]
-            print(result)
+            print('game_date:' + str(result))
             res = requests.get(url).content
             pqHtml = PyQuery(res.decode())
             a = 0
@@ -86,7 +86,7 @@ def get_player_id():
                     cur.execute(updateSql, val)
                 a += 1
             conn.commit()
-            print(x)
+            print('KDA:' + str(x))
         except:
             print('end_player_id')
             break
@@ -117,7 +117,7 @@ def get_win():
         # [0]ID,[1]team_name,[2]url
         for each in results:
             # print(each[0], each[1], each[2])
-            print(each[0])
+            print('win:' + str(each[0]))
             val = (each[0])
             url = each[2]
             res = requests.get(url).content
@@ -155,7 +155,6 @@ def get_skill():
             url = results[1]
             res = requests.get(url).content
             pqHtml = PyQuery(res.decode())
-            end = str(results[0])
             print('skill:' + str(results[0]))
             a = 0
             pqHtml('div.bans_img a').remove()
@@ -195,7 +194,7 @@ def get_skill():
                 a += 1
             conn.commit()
         except:
-            print('skill_end:' + end)
+            print('skill_end')
             break
 
 
@@ -210,7 +209,6 @@ def get_equipment():
             res = requests.get(url).content
             pqHtml = PyQuery(res.decode())
             print('equipment:' + str(results[0]))
-            end = str(results[0])
             b = 0
             for each in pqHtml('div.bans_bot').items():
                 c = 1
@@ -261,7 +259,7 @@ def get_equipment():
                 b += 1
             conn.commit()
         except:
-            print('equipment_end:' + end)
+            print('equipment_end')
             break
 
 
@@ -290,7 +288,7 @@ def get_duration():
         cur.execute(sql)
         results = cur.fetchall()
         for each in results:
-            print(each[0])
+            print('duration:' + str(each[0]))
             matchid = each[1][-15:-10]
             data = {
                 '_gtk': '352331259',
@@ -307,6 +305,39 @@ def get_duration():
         print('end_duration')
 
 
+def get_team_id():
+    sql = 'SELECT ID,team_name,url FROM player_role_data WHERE team_id IS NULL'
+    updateSql_team_id = 'UPDATE player_role_data SET team_id = %s WHERE ID = %s'
+    try:
+        cur.execute(sql)
+        results = cur.fetchall()
+        # [0]ID,[1]team_name,[2]url
+        for result in results:
+            print('team_id:' + str(result[0]))
+            url = result[2]
+            res = requests.get(url).content
+            pqHtml = PyQuery(res.decode())
+            a = 0
+            for each in pqHtml('div.bssj_top span').items():
+                if each.attr('value'):
+                    if a == 0:
+                        team_id1 = each.attr('value')
+                        team_name1 = pqHtml('span.tl.bssj_tt1').text().split()[0]
+                        a += 1
+                    elif a == 1:
+                        team_id2 = each.attr('value')
+                        team_name2 = pqHtml('span.tr.bssj_tt3').text().split()[-1]
+                        a += 1
+            if result[1] == team_name1:
+                val = (team_id1, result[0])
+            elif result[1] == team_name2:
+                val = (team_id2, result[0])
+            cur.execute(updateSql_team_id, val)
+            conn.commit()
+    except:
+        print('end_team_id')
+
+
 if __name__ == '__main__':
     get_game_date()
     get_player_id()
@@ -315,5 +346,6 @@ if __name__ == '__main__':
     get_skill()
     get_equipment()
     get_duration()
+    get_team_id()
     cur.close()
     conn.close()
