@@ -86,7 +86,7 @@ def get_player_id():
                     cur.execute(updateSql, val)
                 a += 1
             conn.commit()
-            print('KDA:' + str(x))
+            print('player_id:' + str(x))
         except:
             print('end_player_id')
             break
