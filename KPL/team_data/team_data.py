@@ -1,11 +1,10 @@
+# 用于获取各战队总数据，胜局/平局/负局
+# 直接运行即可
+# 其中战队LK 1/0/9,VgHow 0/0/10
 import requests
 from pyquery import PyQuery
 from KPL.team_data.conatants import team_league
 import pymysql
-
-# LK 1/0/9
-# VgHow 0/0/10
-
 
 header = {
     'accept': 'application/json, text/javascript, */*; q=0.01',

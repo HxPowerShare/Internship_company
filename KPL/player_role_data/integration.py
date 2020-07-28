@@ -1,3 +1,5 @@
+# 运行之前先运行完player_role_data，并确保数据库中英雄联盟数据已经被删除，直接运行即可
+# 用于补充player_role_data表中的数据
 import requests
 import pymysql
 from pyquery import PyQuery

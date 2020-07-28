@@ -1,3 +1,4 @@
+# 常量信息，挂钩赛季eid
 class team_league(object):
     league = {
         '2016年 KPL秋季赛': 414,
