@@ -1,5 +1,5 @@
 # 用于获取所有全部比赛战队比分情况
-# 直接运行即可
+# 直接运行即可(不建议用)
 import requests
 import pymysql
 from pyquery import PyQuery

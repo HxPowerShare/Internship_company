@@ -13,7 +13,7 @@ data_list = []
 # 获取数据
 def get_info():
     # 开始标志
-    page = 30688
+    page = 68797
     while True:
         # 获取比赛选手详细信息的url
         url = 'https://m.wanplus.com/match/{}.html#data'.format(page)
@@ -22,7 +22,7 @@ def get_info():
         # 当前输出标志
         print(page)
         # 结束标志
-        if page > 30688:
+        if page > 68909:
             print('end_page:' + str(page))
             break
         page += 1
