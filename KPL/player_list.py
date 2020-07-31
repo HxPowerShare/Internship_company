@@ -2,7 +2,7 @@
 # 每有新赛季开始时运行一次即可，运行时需要清空player_list表
 import requests
 import pymysql
-from KPL.team_data.conatants import team_league
+from Internship_company.KPL.team_data.conatants import team_league
 
 # 连接数据库
 database = 'kpl_history'

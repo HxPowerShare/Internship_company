@@ -3,7 +3,7 @@
 # 其中战队LK 1/0/9,VgHow 0/0/10
 import requests
 from pyquery import PyQuery
-from KPL.team_data.conatants import team_league
+from Internship_company.KPL.team_data.conatants import team_league
 import pymysql
 
 header = {
